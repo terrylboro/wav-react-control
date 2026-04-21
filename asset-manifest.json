@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/wav_react_control/static/css/main.ea9c5bb5.css",
-    "main.js": "/wav_react_control/static/js/main.95b7be31.js",
-    "static/js/453.4046d97e.chunk.js": "/wav_react_control/static/js/453.4046d97e.chunk.js",
-    "index.html": "/wav_react_control/index.html",
-    "main.ea9c5bb5.css.map": "/wav_react_control/static/css/main.ea9c5bb5.css.map",
-    "main.95b7be31.js.map": "/wav_react_control/static/js/main.95b7be31.js.map",
-    "453.4046d97e.chunk.js.map": "/wav_react_control/static/js/453.4046d97e.chunk.js.map"
+    "main.css": "/wav-react-control/static/css/main.ea9c5bb5.css",
+    "main.js": "/wav-react-control/static/js/main.6340e3dc.js",
+    "static/js/453.4046d97e.chunk.js": "/wav-react-control/static/js/453.4046d97e.chunk.js",
+    "index.html": "/wav-react-control/index.html",
+    "main.ea9c5bb5.css.map": "/wav-react-control/static/css/main.ea9c5bb5.css.map",
+    "main.6340e3dc.js.map": "/wav-react-control/static/js/main.6340e3dc.js.map",
+    "453.4046d97e.chunk.js.map": "/wav-react-control/static/js/453.4046d97e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ea9c5bb5.css",
-    "static/js/main.95b7be31.js"
+    "static/js/main.6340e3dc.js"
   ]
 }
