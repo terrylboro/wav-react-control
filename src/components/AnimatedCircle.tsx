@@ -1,3 +1,4 @@
+import { Box } from '@mantine/core';
 import React, { useState, useEffect } from 'react';
 
 export const AnimatedCircle: React.FC = () => {
@@ -12,25 +13,40 @@ export const AnimatedCircle: React.FC = () => {
   }, []);
 
   return (
-    <div
+    <Box
       style={{
-        width: '100vw',
-        height: '100vh',
+        width: '100%',
+        // height: '100%',
+        minHeight: '400px',
         backgroundColor: 'black',
+        transition: 'background-color 0.1s',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <div
+      <Box
         style={{
-          width: '100px',
-          height: '100px',
+          width: '90px',
+          height: '90px',
           borderRadius: '50%',
           backgroundColor: isVisible ? 'red' : 'black',
-          transition: 'background-color 0.1s',
+          position: 'absolute',
+          zIndex: 1,
         }}
       />
-    </div>
+    </Box>
   );
 };
+
+// {/* <div
+    //     style={{
+    //       width: '100px',
+    //       height: '100px',
+    //       borderRadius: '50%',
+    //       backgroundColor: isVisible ? 'red' : 'black',
+    //       transition: 'background-color 0.1s',
+    //     }}
+    //   /> */}

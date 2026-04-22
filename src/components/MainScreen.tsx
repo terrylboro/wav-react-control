@@ -59,10 +59,10 @@ export default function SetupScreen({
               <Stack h="100%" justify="space-between" align="stretch">
                 <Box>
                   <Title order={1} mb="sm">
-                    Connect device
+                    Exercise 1
                   </Title>
                   <Text c="dimmed" size="sm">
-                    Connect to your Bluetooth device before starting treatment.
+                    Make sure you connect to your Bluetooth device before starting treatment!
                   </Text>
                 </Box>
 
@@ -101,23 +101,9 @@ export default function SetupScreen({
               shadow="sm"
               radius="md"
               p="xl"
-              style={{ minHeight: 240, maxHeight: 400 }}
+              style={{ minHeight: 465, maxHeight: 400, minWidth: 800, maxWidth: 1000 }}
             >
-              <Stack gap="md">
-                <AnimatedCircle />
-                {/* <Button fullWidth size="xl" onClick={() => ble.playFile("INSTRU~1.WAV")} disabled={bleStatus !== 'connected'}>
-                  Instructions
-                </Button>
-                <Button fullWidth size="xl" onClick={() => ble.playFile("1HZ_ME~1.WAV")} disabled={bleStatus !== 'connected'}>
-                  Start Exercise
-                </Button>
-                <Button fullWidth size="xl" onClick={() => ble.playFile("SAMPL~16.WAV")} disabled={bleStatus !== 'connected'}>
-                  Play Sound
-                </Button> */}
-                {/* <Button fullWidth size="xl" onClick={() => ble.sendStop()} disabled={bleStatus !== 'connected'}>
-                  Stop Sound
-                </Button> */}
-              </Stack>
+            <AnimatedCircle />
             </Card>
           </Grid.Col>
 
