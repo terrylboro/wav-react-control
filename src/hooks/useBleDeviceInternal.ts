@@ -32,30 +32,6 @@ export function useBleDeviceInternal(options?: UseBleDeviceOptions) {
   const characteristicRef = useRef<BluetoothRemoteGATTCharacteristic | null>(null);
   const disconnectHandlerRef = useRef<((event: Event) => void) | null>(null);
 
-  const appendMessage = useCallback((value: DataView) => {
-    const msg = {
-      timestamp: Date.now(),
-      data: value,
-    };
-
-    setLatestMessage(msg);
-
-    setMessages((prev) => {
-      const next = [...prev, msg];
-      return next.length > 200 ? next.slice(next.length - 200) : next;
-    });
-  }, []);
-
-  const onCharacteristicValueChanged = useCallback(
-    (event: Event) => {
-      const target = event.target as BluetoothRemoteGATTCharacteristic;
-      if (target?.value) {
-        appendMessage(target.value);
-      }
-    },
-    [appendMessage]
-  );
-
   const encodeCommand = useCallback((command: string) => {
     return new TextEncoder().encode(command.trim());
   }, []);
@@ -109,6 +85,8 @@ export function useBleDeviceInternal(options?: UseBleDeviceOptions) {
       const trimmedServiceUUID = serviceUUID.trim();
       const trimmedCharUUID = charUUID.trim();
 
+      console.log("Executing bluetooth connect")
+
       let options: RequestDeviceOptions;
 
       if (trimmedServiceUUID) {
@@ -125,10 +103,12 @@ export function useBleDeviceInternal(options?: UseBleDeviceOptions) {
 
       const device = await navigator.bluetooth.requestDevice(options);
       deviceRef.current = device;
+      console.log(`Selected device: ${device.name || device.id}`);
       setDeviceName(device.name || device.id || 'Unknown');
 
       const handleDisconnected = () => {
         setConnected(false);
+        characteristicRef.current = null;
       };
 
       disconnectHandlerRef.current = handleDisconnected;
@@ -140,49 +120,34 @@ export function useBleDeviceInternal(options?: UseBleDeviceOptions) {
         return false;
       }
 
+      console.log(`Connected to GATT server, discovering service ${trimmedServiceUUID} and characteristic ${trimmedCharUUID}`);
       const service = await server.getPrimaryService(trimmedServiceUUID);
       const chosenCharacteristic = await service.getCharacteristic(trimmedCharUUID);
 
       characteristicRef.current = chosenCharacteristic;
+
+      console.log("Successfully obtained characteristic, checking properties...");
 
       if (!(chosenCharacteristic.properties.write || chosenCharacteristic.properties.writeWithoutResponse)) {
         setError('Selected BLE characteristic does not support writes.');
         return false;
       }
 
-      if (chosenCharacteristic.properties.notify || chosenCharacteristic.properties.indicate) {
-        chosenCharacteristic.addEventListener(
-          'characteristicvaluechanged',
-          onCharacteristicValueChanged as EventListener
-        );
-        await chosenCharacteristic.startNotifications();
-      } else if (chosenCharacteristic.properties.read) {
-        const value = await chosenCharacteristic.readValue();
-        appendMessage(value);
-      }
-
+      setError(null);
+      console.log(`Connected to device: ${device.name || device.id}`);
       setConnected(true);
       return true;
     } catch (e: any) {
       setError(e?.message || String(e));
+      console.log(`Failed to connect to device: ${e}`);
       setConnected(false);
       return false;
     }
-  }, [serviceUUID, charUUID, onCharacteristicValueChanged, appendMessage]);
+  }, [serviceUUID, charUUID]);
 
   const disconnect = useCallback(async () => {
     try {
       if (characteristicRef.current) {
-        try {
-          await characteristicRef.current.stopNotifications();
-        } catch {
-          // ignore
-        }
-
-        characteristicRef.current.removeEventListener(
-          'characteristicvaluechanged',
-          onCharacteristicValueChanged as EventListener
-        );
         characteristicRef.current = null;
       }
 
@@ -203,10 +168,11 @@ export function useBleDeviceInternal(options?: UseBleDeviceOptions) {
     } catch {
       // ignore
     }
-  }, [onCharacteristicValueChanged]);
+  }, []);
 
   const clearMessages = useCallback(() => {
     setMessages([]);
+    setLatestMessage(null);
   }, []);
 
   const sendStop = useCallback(() => writeCommand('STOP'), [writeCommand]);

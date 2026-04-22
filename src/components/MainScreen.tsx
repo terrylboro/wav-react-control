@@ -43,9 +43,9 @@ export default function SetupScreen({
     >
       <Stack w="100%" gap="xs">
         <Grid gutter="xs" align="stretch">
-          <Grid.Col span={12}>
+          {/* <Grid.Col span={12}>
             <LiveChartCard />
-          </Grid.Col>
+          </Grid.Col> */}
           <Grid.Col span={{ base: 12, sm: 4 }}>
             <Card
               withBorder
@@ -69,6 +69,16 @@ export default function SetupScreen({
                 <Button fullWidth size="xl" onClick={onConnect} loading={bleStatus === 'connecting'} color={bleStatus === 'connected' ? theme.colors.green[6] : theme.colors.blue[6]}>
                   {bleStatus === 'connected' ? 'Connected' : 'Connect'}
                 </Button>
+                {deviceName && (
+                  <Text size="sm" c="dimmed">
+                    {deviceName}
+                  </Text>
+                )}
+                {bleError && (
+                  <Text size="sm" c="red">
+                    {bleError}
+                  </Text>
+                )}
                 </Stack>
               </Stack>
             </Card>
@@ -83,12 +93,18 @@ export default function SetupScreen({
               style={{ minHeight: 240 }}
             >
               <Stack gap="md">
+                <Button fullWidth size="xl" onClick={() => ble.playFile("INSTRU~1.WAV")} disabled={bleStatus !== 'connected'}>
+                  Instructions
+                </Button>
+                <Button fullWidth size="xl" onClick={() => ble.playFile("1HZ_ME~1.WAV")} disabled={bleStatus !== 'connected'}>
+                  Start Exercise
+                </Button>
                 <Button fullWidth size="xl" onClick={() => ble.playFile("SAMPL~16.WAV")} disabled={bleStatus !== 'connected'}>
                   Play Sound
                 </Button>
-                <Button fullWidth size="xl" onClick={() => ble.sendStop()} disabled={bleStatus !== 'connected'}>
+                {/* <Button fullWidth size="xl" onClick={() => ble.sendStop()} disabled={bleStatus !== 'connected'}>
                   Stop Sound
-                </Button>
+                </Button> */}
               </Stack>
             </Card>
           </Grid.Col>
