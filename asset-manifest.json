@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/wav-react-control/static/css/main.ea9c5bb5.css",
-    "main.js": "/wav-react-control/static/js/main.74d4f50f.js",
+    "main.js": "/wav-react-control/static/js/main.180a56ab.js",
     "static/js/453.4046d97e.chunk.js": "/wav-react-control/static/js/453.4046d97e.chunk.js",
     "index.html": "/wav-react-control/index.html",
     "main.ea9c5bb5.css.map": "/wav-react-control/static/css/main.ea9c5bb5.css.map",
-    "main.74d4f50f.js.map": "/wav-react-control/static/js/main.74d4f50f.js.map",
+    "main.180a56ab.js.map": "/wav-react-control/static/js/main.180a56ab.js.map",
     "453.4046d97e.chunk.js.map": "/wav-react-control/static/js/453.4046d97e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ea9c5bb5.css",
-    "static/js/main.74d4f50f.js"
+    "static/js/main.180a56ab.js"
   ]
 }
