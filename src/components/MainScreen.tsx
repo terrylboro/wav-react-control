@@ -11,6 +11,7 @@ import {
 
 import { useBleDevice } from '../context/BleProvider';
 import LiveChartCard from './LiveChartCard';
+import { AnimatedCircle } from './AnimatedCircle';
 
 type SetupScreenProps = {
   bleStatus: 'disconnected' | 'connecting' | 'connected' | 'error';
@@ -79,6 +80,16 @@ export default function SetupScreen({
                     {bleError}
                   </Text>
                 )}
+
+                <Button fullWidth size="xl" onClick={() => ble.playFile("INST.WAV")} disabled={bleStatus !== 'connected'}>
+                  Instructions
+                </Button>
+                <Button fullWidth size="xl" onClick={() => ble.playFile("1HZ.WAV")} disabled={bleStatus !== 'connected'}>
+                  Start Exercise
+                </Button>
+                <Button fullWidth size="xl" onClick={() => ble.playFile("SAMPL~16.WAV")} disabled={bleStatus !== 'connected'}>
+                  Play Sound
+                </Button>
                 </Stack>
               </Stack>
             </Card>
@@ -90,10 +101,11 @@ export default function SetupScreen({
               shadow="sm"
               radius="md"
               p="xl"
-              style={{ minHeight: 240 }}
+              style={{ minHeight: 240, maxHeight: 400 }}
             >
               <Stack gap="md">
-                <Button fullWidth size="xl" onClick={() => ble.playFile("INSTRU~1.WAV")} disabled={bleStatus !== 'connected'}>
+                <AnimatedCircle />
+                {/* <Button fullWidth size="xl" onClick={() => ble.playFile("INSTRU~1.WAV")} disabled={bleStatus !== 'connected'}>
                   Instructions
                 </Button>
                 <Button fullWidth size="xl" onClick={() => ble.playFile("1HZ_ME~1.WAV")} disabled={bleStatus !== 'connected'}>
@@ -101,7 +113,7 @@ export default function SetupScreen({
                 </Button>
                 <Button fullWidth size="xl" onClick={() => ble.playFile("SAMPL~16.WAV")} disabled={bleStatus !== 'connected'}>
                   Play Sound
-                </Button>
+                </Button> */}
                 {/* <Button fullWidth size="xl" onClick={() => ble.sendStop()} disabled={bleStatus !== 'connected'}>
                   Stop Sound
                 </Button> */}
