@@ -88,7 +88,7 @@ export default function SetupScreen({
                   Start Exercise
                 </Button>
                 <Button fullWidth size="xl" onClick={() => ble.playFile("SAMPL~16.WAV")} disabled={bleStatus !== 'connected'}>
-                  Play Sound
+                  Play Music
                 </Button>
                 </Stack>
               </Stack>

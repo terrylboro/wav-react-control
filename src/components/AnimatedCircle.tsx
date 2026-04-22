@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react';
 export const AnimatedCircle: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsVisible(prev => !prev);
-    }, 500);
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setIsVisible(prev => !prev);
+//     }, 500);
 
-    return () => clearInterval(interval);
-  }, []);
+//     return () => clearInterval(interval);
+//   }, []);
 
   return (
     <Box
