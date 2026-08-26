@@ -9,3 +9,5 @@ It demonstrates the following functionality:
 /wav-zephyr-control contains the firmware controlling I2S audio playback and Bluetooth communication.
 There is a larger ReadMe in that folder but building the firmware using west build -b xiao_ble allows you to generate your own uf2 file.
 Otherwise I have attached a uf2 in this folder as well which hopefully should just work.
+
+/basic_i2s_test contains basic I2S audio playback, playing a simple sine wave or .wav file.
